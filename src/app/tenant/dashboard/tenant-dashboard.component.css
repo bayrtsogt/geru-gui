@@ -1,0 +1,71 @@
+/* Менүүдийн grid */
+.menu-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+/* Нэг меню card */
+.menu-card {
+  width: 240px;
+  background: #fff;
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+}
+
+/* Толгойн хэсэг */
+.menu-header {
+  font-weight: 600;
+  padding: 1rem;
+  border-bottom: 1px solid #eee;
+}
+
+/* Биеийн хэсэг */
+.menu-body {
+  flex: 1;
+  padding: 1rem;
+  overflow-y: auto;
+  font-size: 0.9rem;
+  color: #333;
+}
+
+.no-prod {
+  color: #888;
+  font-style: italic;
+  text-align: center;
+}
+
+/* Өгүүллийн төгсгөл */
+.menu-footer {
+  padding: 0.5rem 1rem;
+  text-align: right;
+  border-top: 1px solid #eee;
+}
+.chip-selector {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  max-height: 250px;
+  overflow-y: auto;
+  padding: 0.5rem;
+  background: #f9f9f9;
+  border-radius: 4px;
+}
+
+.p-chip {
+  cursor: pointer;
+  user-select: none;
+}
+
+.chip-unselected {
+  background: #e0f7fa;    /* light blue */
+  color: #006064;
+}
+
+.chip-selected {
+  background: #b2dfdb;    /* greyed out green */
+  color: #004d40;
+}

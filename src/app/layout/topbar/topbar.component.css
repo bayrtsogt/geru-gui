@@ -1,0 +1,50 @@
+.topbar{
+  padding: 20px;
+  height: 70px;
+  width: 100%;
+  background: white;
+  box-shadow: 0 0 10px -3px;
+  cursor: pointer;
+}
+.logo{
+  margin: 0 40px;
+  font-size: 30px;
+  font-weight: bold;
+}
+.menu-title{
+  margin-right: 15px;
+  padding: 4px 10px;
+  font-size: 15px;
+  cursor: pointer;
+  transition: 0.4s;
+  border-bottom: 2px solid transparent;
+}
+.menu-title:hover{
+  border-bottom: 2px solid var(--main-red);
+}
+#main img{
+  z-index: 1;
+}
+#main textBox{
+  z-index: 100;
+}
+.name{
+  margin: 0 20px;
+}
+.active{
+  border-bottom: 2px solid var(--main-red);
+}
+.menu-title .disabled:hover{
+  border-bottom: 0px solid var(--main-red) !important;
+}
+
+.password-field {
+  position: relative;
+}
+
+.password-field button {
+  position: absolute;
+  right: 5px;
+  top: 50%;
+  transform: translateY(-50%);
+}

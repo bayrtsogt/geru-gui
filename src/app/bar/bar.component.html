@@ -1,0 +1,101 @@
+<div style="width: 100vw; height: 100vh; background: linear-gradient(180deg, rgb(194,117,80),white); overflow: hidden">
+    <div class="grid" style="margin: unset">
+        <div class="col-2" style="padding: unset">
+            <div style=" width: 100%; height: 100vh; background-color: var(--main-blue); color: white">
+                <div class="flex justify-content-center align-items-center" style="flex-direction: column; height: 10vh">
+                    <div class="mainTitle">
+                        GERU
+                    </div>
+                    <div class="mainLine">
+                    </div>
+                    <div class="mainSubTitle">
+                        RESTAURANT SYSTEM
+                    </div>
+                </div>
+                <div class="flex justify-content-center align-items-center" style="flex-direction: column; height: 90vh">
+                    <div class="flex justify-content-between" style="flex-direction: column;gap: 20px">
+                        <div class="nav-btn"
+                             (click)="isOrder = true">
+                            <img src="assets/order.png" height="50px">
+                            <div>Захиалга</div>
+                        </div>
+                        <div class="nav-btn"
+                             (click)="isOrder = false;">
+                            <img src="assets/martini-glass-citrus.png" height="50px">
+                            <div>Бүтээгдэхүүнүүд</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-10" style="padding: unset" *ngIf="isOrder">
+            <div class="flex align-items-center justify-content-left pl-6"
+                 style="height: 10vh; border-bottom: 1px solid var(--main-blue); font-family: 'MonFnt11Bold', sans-serif !important; color:var(--main-blue); font-size: 24px">
+                Захиалгууд
+            </div>
+            <div class="flex align-items-left justify-content-left p-6"
+                 style="flex-direction: column; height: 90vh; overflow-y: auto;  border-bottom: 1px solid var(--main-blue); font-family: 'MonFnt11Bold', sans-serif !important; color:var(--main-blue); font-size: 24px">
+                <div style="height: calc(90vh - 2px); width: 100%; padding-bottom: 20px;">
+                    <div style="width: 100%" *ngFor="let order of orders">
+                        <div class="grid"  style="width: 100%">
+                            <div class="col-12">
+                                <div style="width: fit-content; border: 2px solid var(--main-blue); border-radius: 20px; padding: 5px 20px">
+                                    Ширээний дугаар {{order.tableNumber}}
+                                </div>
+                            </div>
+                            <div class="restaurant-card col-3" *ngFor="let product of order.products">
+                                <div class="cover-container">
+                                    <img [src]="'data:image/jpeg;base64,' + product.image"
+                                         [alt]="product.name"
+                                         class="cover-img" />
+                                </div>
+                                <div class="card-body">
+                                    <div class="product-name">{{ product.name }} X{{ product.count }}</div>
+                                    <div class="product-price">{{ product.price | number }}₮</div>
+                                </div>
+                                <div class="button-bar" align="right">
+                                    <div class="button" (click)="done(product.orderId)">
+                                        <i class="pi pi-check"></i>
+                                        <span>Хүргэсэн</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-10" style="padding: unset" *ngIf="!isOrder">
+            <div class="flex align-items-center justify-content-left pl-6"
+                 style="height: 10vh; border-bottom: 1px solid var(--main-blue); font-family: 'MonFnt11Bold', sans-serif !important; color:var(--main-blue); font-size: 24px">
+                Бүтээгдэхүүнүүд
+            </div>
+            <div class="flex align-items-left justify-content-left p-6"
+                 style="height: 90vh; border-bottom: 1px solid var(--main-blue); font-family: 'MonFnt11Bold', sans-serif !important; color:var(--main-blue); font-size: 24px">
+
+                <div class="grid"  style="width: 100%">
+                    <div class="restaurant-card  col-3" *ngFor="let product of products">
+                        <div class="cover-container">
+                            <img [src]="'data:image/jpeg;base64,' + product.image"
+                                 [alt]="product.name"
+                                 class="cover-img" />
+                        </div>
+                        <div class="card-body">
+                            <div class="product-name">{{ product.name }}</div>
+                            <div class="product-price">{{ product.price | number }}₮</div>
+                        </div>
+                        <div class="button-bar" align="right">
+                            <div class="active" style="{{product.activeFlag == 1 ? 'color: green; border-color: green' : 'color: red; border-color: red'}}">
+                                <span>{{product.activeFlag == 1 ? 'Идэвхитэй' : 'Идэвхигүй'}}  </span>
+                            </div>
+                            <div class="button" (click)="active(product)">
+                                <i class="{{product.activeFlag == 1 ? 'pi pi-minus' : 'pi pi-plus'}}"></i>
+                                <span>{{product.activeFlag == 1 ? 'Цэснээс хасах' : 'Цэсэнд нэмэх'}}  </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,45 @@
+.item{
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 50px;
+  padding: 40px;
+  border-radius: 25px;
+  box-shadow: var(--main-box-shadow);
+  background: white;
+  cursor: pointer;
+}
+.item:hover{
+   background-color: #E5E5E5; /* Color on hover */
+}
+.item:active{
+   background-color: #d0d0d0; /* Color on hover */
+}
+.item img{
+  width: 180px;
+  margin: 20px;
+}
+.item span {
+  font-size: 20px;
+  font-weight: 500;
+  color: #1B1C30;
+  text-transform: uppercase;
+}
+.password-field {
+  position: relative;
+}
+
+.password-field button {
+  position: absolute;
+  right: 5px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.getPass{
+  margin: 5px;
+  cursor:pointer;
+}
+.getPass:hover{
+  text-decoration: underline;
+}

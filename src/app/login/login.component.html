@@ -1,0 +1,47 @@
+<div class="flex justify-content-center align-items-center" style=" height: calc(100vh - 200px)" *ngIf="!displayRoles">
+  <div style="width: 500px;">
+    <p-card>
+      <ng-template pTemplate="headerless">
+        <div class="flex justify-content-center" style="border-bottom: 3px solid var(--main-blue); margin: 10px; padding: 10px">
+          <div style="font-size: 30px; font-weight: bold" class="color-blue">Нэвтрэх</div>
+        </div>
+        <div class="flex justify-content-center">
+          <div class="grid"  style="width: 90%">
+            <div class="col-12">
+              <div class="inputTitle">Цахим шуудас \ Утасны дугаар</div>
+              <input pInputText [(ngModel)]="phoneNumber">
+            </div>
+            <div class="col-12">
+              <div class="inputTitle">Нууц үг</div>
+              <div class="password-field">
+                <input pInputText
+                       [type]="passwordVisible ? 'text' : 'password'"
+                       [(ngModel)]="password">
+                <button pButton icon="{{!passwordVisible ? 'pi pi-eye' : 'pi pi-eye-slash'}}" (click)="togglePasswordVisibility()"></button>
+              </div>
+            </div>
+            <div class="col-12" align="right">
+              <span (click)="visibleResetPassword = true" class="getPass">Нууц үг сэргээх</span>
+            </div>
+            <div class="col-12" align="center">
+              <button pButton class="main-button" (click)="login()">Нэвтрэх</button>
+            </div>
+
+          </div>
+        </div>
+      </ng-template>
+    </p-card>
+  </div>
+</div>
+<p-dialog header="Нууц үг сэргээх" [(visible)]="visibleResetPassword" modal="true">
+  <div class="grid">
+    <div class="col-12">
+      <div class="inputTitle">Цахим шуудас</div>
+      <input pInputText [(ngModel)]="mailAddress">
+    </div>
+    <div class="col-12" align="center">
+      <button pButton class="main-button" (click)="sendPass()">Нууц үг авах</button>
+    </div>
+  </div>
+
+</p-dialog>

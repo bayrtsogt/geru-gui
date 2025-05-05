@@ -1,0 +1,18 @@
+<!-- app.component.html -->
+
+<!-- only show header & sidebar in default layout -->
+<ng-container *ngIf="layout === 'default'">
+  <div class="top-bar">
+    <app-topbar></app-topbar>
+  </div>
+</ng-container>
+
+<!-- main outlet always rendered -->
+<div>
+  <router-outlet></router-outlet>   <!-- Angular plugs in the active component here :contentReference[oaicite:9]{index=9} -->
+</div>
+
+<!-- global services -->
+<app-loading></app-loading>
+<p-toast></p-toast>
+<p-confirmDialog></p-confirmDialog>

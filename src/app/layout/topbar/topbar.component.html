@@ -1,0 +1,122 @@
+<div class="topbar" id="topbar">
+  <div class="grid">
+    <div class="col-8">
+      <div class="flex align-items-center justify-content-left">
+        <div class="logo" id="logo"(click)="!authService.isAuthenticated() ? scrollToMain() : refresh()">GERU
+        </div>
+        <div class="menu-title" (click)="scrollToAbout()" *ngIf="!authService.isAuthenticated()">Бидний тухай</div>
+        <div class="menu-title" (click)="scrollToRent()" *ngIf="!authService.isAuthenticated()">QR Цэс</div>
+        <div class="menu-title" (click)="scrollToRental()" *ngIf="!authService.isAuthenticated()">Real Time Menu</div>
+        <div class="menu-title" (click)="navigate('restaurant')" *ngIf="authService.isAuthenticated()">Ресторан</div>
+        <div class="menu-title" (click)="navigate('product')" *ngIf="authService.isAuthenticated()">Бүтээгдэхүүн</div>
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="flex align-items-center justify-content-right">
+        <div class="menu-title" routerLink="/register" *ngIf="!authService.isAuthenticated()" (click)="topbarChange()">Бүртгүүлэх</div>
+        <p-button label="Нэвтрэх" routerLink="/login" *ngIf="!authService.isAuthenticated()" (click)="topbarChange()"></p-button>
+
+        <!-- Display user name if authenticated -->
+        <span class="name" *ngIf="authService.isAuthenticated()">
+          Сайн байна уу ? {{
+          (localStorage.getItem('userName') + "")
+            .replace('"', '')
+            .replace('"', '')}}
+        </span>
+
+        <!-- Logout option -->
+        <div class="menu-title" *ngIf="authService.isAuthenticated()" (click)="user()">
+          <i class="pi pi-user"></i>
+        </div>
+        <!-- Logout option -->
+        <div class="menu-title" *ngIf="authService.isAuthenticated()" (click)="logout($event)">
+          <i class="pi pi-sign-out"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--<p-dialog [(visible)]="visibleRegister" header="Бүртэл шинэчлэх" [modal]="true">-->
+<!--  <div class="grid">-->
+<!--    <div class="col-6">-->
+<!--      <div class="grid">-->
+<!--        <div class="col-6">-->
+<!--          <button class="{{isTenant ? 'background-blue' : 'background-white'}}" (click)="isTenant = !isTenant">Түрээслэгч</button>-->
+<!--        </div>-->
+<!--        <div class="col-6">-->
+<!--          <button class="{{isOwner ? 'background-blue' : 'background-white'}}" (click)="isOwner = !isOwner">Түрээслүүлэгч</button>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--    <div class="col-6"></div>-->
+<!--    <div class="col-6">-->
+<!--      <div class="inputTitle">Хэрэглэгчийн овог</div>-->
+<!--      <input pInputText disabled [(ngModel)]="lastName" (keydown)="onKeydown($event, 'lastName')">-->
+<!--    </div>-->
+<!--    <div class="col-6">-->
+<!--      <div class="inputTitle">Хэрэглэгчийн нэр</div>-->
+<!--      <input pInputText disabled [(ngModel)]="firstName" (keydown)="onKeydown($event, 'firstName')">-->
+<!--    </div>-->
+<!--    <div class="col-6">-->
+<!--      <div class="inputTitle">Регистрийн дугаар</div>-->
+<!--      <input pInputText disabled [(ngModel)]="pin" (focusout)="registerSyntax()" (keyup)="onKeydown($event, 'pin')">-->
+<!--    </div>-->
+<!--    <div class="col-6">-->
+<!--      <div class="inputTitle">Цахим шуудан хаяг</div>-->
+<!--      <input pInputText [(ngModel)]="email" (focusout)="mailSyntax()">-->
+<!--    </div>-->
+<!--    <div class="col-6">-->
+<!--      <div class="inputTitle">Холбоо барих утас</div>-->
+<!--      <input pInputText [(ngModel)]="phoneNumber" (focusout)="phoneSyntax()">-->
+<!--    </div>-->
+<!--    <div class="col-6">-->
+<!--      <div class="inputTitle">Нууц үг</div>-->
+<!--      <div class="password-field">-->
+<!--        <input pInputText-->
+<!--               [type]="passwordVisible ? 'text' : 'password'"-->
+<!--               [(ngModel)]="password">-->
+<!--        <button pButton icon="{{!passwordVisible ? 'pi pi-eye' : 'pi pi-eye-slash'}}" (click)="togglePasswordVisibility()"></button>-->
+<!--      </div>-->
+<!--    </div>-->
+
+<!--    <div class="blueLine" *ngIf="isTenant || isOwner"></div>-->
+<!--    <div class="col-6" *ngIf="isOwner">-->
+<!--      <div class="inputTitle">Банк</div>-->
+<!--      <p-dropdown-->
+<!--        [options]="banks"-->
+<!--        [(ngModel)]="bank"-->
+<!--        optionLabel="name"-->
+<!--        placeholder="Банк сонгох" [required]="true">-->
+<!--        <ng-template pTemplate="selectedItem">-->
+<!--          <div class="flex align-items-center gap-2" *ngIf="bank">-->
+<!--            <img-->
+<!--              src="{{bank.iconSrc}}"-->
+<!--              style="width: 20px; border-radius: 5px" />-->
+<!--            <div>{{ bank.name }}</div>-->
+<!--          </div>-->
+<!--        </ng-template>-->
+<!--        <ng-template let-bank pTemplate="item">-->
+<!--          <div class="flex align-items-center gap-2">-->
+<!--            <img-->
+<!--              src="{{bank.iconSrc}}"-->
+<!--              style="width: 20px; border-radius: 5px" />-->
+<!--            <div>{{ bank.name }}</div>-->
+<!--          </div>-->
+<!--        </ng-template>-->
+<!--      </p-dropdown>-->
+<!--    </div>-->
+<!--    <div class="col-6" *ngIf="isOwner">-->
+<!--      <div class="inputTitle">Дансны дугаар</div>-->
+<!--      <input pInputText [(ngModel)]="accountNumber">-->
+<!--    </div>-->
+<!--    <div class="col-6" *ngIf="isTenant">-->
+<!--      <div class="inputTitle">Жолооны үнэмлэхний дугаар</div>-->
+<!--      <input pInputText [(ngModel)]="driverLicense">-->
+<!--    </div>-->
+<!--    <div class="col-12" align="right">-->
+<!--      <p-button class="main-button" (click)="save()" label="Хадгалах"></p-button>-->
+<!--    </div>-->
+<!--  </div>-->
+
+<!--</p-dialog>-->

@@ -1,0 +1,156 @@
+<div style="padding: 20px;">
+  <div class="grid"  style="width: calc(100vw - 50px); height: 3rem; padding: 10px; margin:-15px 0px 25px 0px">
+    <div class="col-6 flex justify-content-left">
+      <div style="font-size: 20px; font-weight: 700; " class="color-blue">Миний бүтээгдэхүүнүүд</div>
+    </div>
+    <div class="col-6 flex justify-content-right">
+      <p-button label="Бүтээгдэхүүн бүртгэх" icon="pi pi-plus" (click)="addProductVisible = true"></p-button>
+    </div>
+  </div>
+  <!-- 3-column section -->
+  <div class="grid" style="width: calc(100vw - 50px); margin-bottom:1rem;">
+
+    <!-- Eats -->
+    <div class="col-4">
+      <h3 class="text-center">Хоол</h3>
+      <div class="grid">
+        <div class="restaurant-card col-5" *ngFor="let product of eats">
+          <div class="cover-container">
+            <img [src]="'data:image/jpeg;base64,' + product.image"
+                 [alt]="product.name"
+                 class="cover-img" />
+          </div>
+          <div class="card-body">
+            <div class="product-name">{{ product.name }}</div>
+            <div class="product-price">{{ product.price | number }}₮</div>
+          </div>
+          <div class="button-bar" align="right">
+            <div class="button" (click)="delete(product)">
+              <i class="pi pi-trash"></i>
+              <span>Устгах</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Soft Drinks -->
+    <div class="col-4">
+      <h3 class="text-center">Ус, ундаа</h3>
+      <div class="grid">
+        <div class="restaurant-card  col-5" *ngFor="let product of softDrinks">
+          <div class="cover-container">
+            <img [src]="'data:image/jpeg;base64,' + product.image"
+                 [alt]="product.name"
+                 class="cover-img" />
+          </div>
+          <div class="card-body">
+            <div class="product-name">{{ product.name }}</div>
+            <div class="product-price">{{ product.price | number }}₮</div>
+          </div>
+          <div class="button-bar" align="right">
+            <div class="button" (click)="delete(product)">
+              <i class="pi pi-trash"></i>
+              <span>Устгах</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Alcohol -->
+    <div class="col-4">
+      <h3 class="text-center">Алкохол</h3>
+      <div class="grid">
+        <div class="restaurant-card  col-5" *ngFor="let product of alcohols">
+          <div class="cover-container">
+            <img [src]="'data:image/jpeg;base64,' + product.image"
+                 [alt]="product.name"
+                 class="cover-img" />
+          </div>
+          <div class="card-body">
+            <div class="product-name">{{ product.name }}</div>
+            <div class="product-price">{{ product.price | number }}₮</div>
+          </div>
+          <div class="button-bar" align="right">
+            <div class="button" (click)="delete(product)">
+              <i class="pi pi-trash"></i>
+              <span>Устгах</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+
+</div>
+
+<p-dialog [(visible)]="addProductVisible"
+          header="Бүтээгдэхүүн бүртгэх"
+          [modal]="true"
+          [closable]="true"
+          style="width:40vw; max-height:80vh;"
+          (onHide)="addProductVisible = false">
+
+  <!-- Зурагны хэсэг -->
+  <div class="cover-containers mb-4">
+    <img *ngIf="product.image"
+         [src]="product.image"
+         class="cover-preview mb-2" />
+    <button pButton
+            icon="pi pi-camera"
+            label="Зураг сонгох"
+            class="upload-btn"
+            (click)="displayImageDialog = true">
+    </button>
+  </div>
+
+  <div class="grid justify-content-center">
+    <div class="col-10">
+      <input id="name"
+             pInputText
+             [(ngModel)]="product.name"
+             name="name"
+             placeholder="Бүтээгдэхүүний нэр" />
+    </div>
+    <div class="col-10">
+      <input pInputText id="price"
+                     [(ngModel)]="product.price"
+                     name="price"
+                     placeholder="Бүтээгдэхүүний үнэ" />
+    </div>
+
+    <div class="col-10">
+      <p-dropdown [options]="productTypes"
+                  [(ngModel)]="product.type"
+                  name="type"
+                  placeholder="Төрөл сонгох">
+      </p-dropdown>
+    </div>
+
+    <!-- Alcohol % (only for Drink) -->
+    <div *ngIf="product.type==='Drink'" class="col-10">
+      <p-inputNumber [(ngModel)]="product.alcoholPercent"
+                     name="alcoholPercent"
+                     placeholder="Архи агууламж (%)"
+                     [min]="0" [max]="100"></p-inputNumber>
+    </div>
+
+    <div class="col-10" align="right">
+      <button pButton
+              type="button"
+              label="Бүртгэх"
+              icon="pi pi-check"
+              (click)="createProduct()">
+      </button>
+    </div>
+  </div>
+
+</p-dialog>
+
+
+<p-dialog [(visible)]="displayImageDialog" header="Зураг оруулах" [modal]="true" [closable]="true" (onHide)="closeImageDialog()">
+  <app-photo-upload (imageUploaded)="onImageUploaded($event)"></app-photo-upload>
+</p-dialog>

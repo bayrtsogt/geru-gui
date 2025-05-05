@@ -1,0 +1,87 @@
+<div style="padding: 20px;">
+  <div class="p-grid p-m-4">
+    <div class="p-col-6">
+      <h2 class="color-blue">Миний ресторанууд</h2>
+    </div>
+    <div class="p-col-6 text-right">
+      <button pButton icon="pi pi-plus" label="Ресторан үүсгэх"
+              (click)="addRestaurantVisible = true">
+      </button>
+    </div>
+  </div>
+
+  <div class="grid p-justify-center">
+    <div class="col-2" *ngFor="let restaurant of restaurants">
+      <p-card class="restaurant-card pointer" >
+        <ng-template pTemplate="header">
+          <div class="cover-container">
+            <img [src]="'data:image/jpeg;base64,' + restaurant.coverImage"
+                 alt="Cover" class="cover-img" />
+            <img [src]="'data:image/png;base64,' + restaurant.profileImage"
+                 alt="Profile" class="profile-img" />
+          </div>
+        </ng-template>
+        <div class="card-body">
+          <div class="text-lg font-semibold">{{ restaurant.name }}</div>
+          <div class="text-xs text-gray-600">{{ restaurant.location }}</div>
+        </div>
+        <div class="button-bar">
+          <div class="button" (click)="openQrDialog(restaurant)">
+            <i class="pi pi-qrcode"></i>
+            <span>QR үүсгэх</span>
+          </div>
+          <div class="button" (click)="delete(restaurant)">
+            <i class="pi pi-trash"></i>
+            <span>Устгах</span>
+          </div>
+        </div>
+      </p-card>
+    </div>
+  </div>
+</div>
+
+<!-- Add Restaurant Dialog -->
+<p-dialog header="Ресторан үүсгэх"
+          [(visible)]="addRestaurantVisible"
+          [modal]="true" [closable]="true"
+          style="width:40vw; max-height:80vh;"
+          (onHide)="addRestaurantVisible = false">
+  <app-addVehicle (donenew)="done()"></app-addVehicle>
+</p-dialog>
+
+
+<!-- QR Code Dialog -->
+<!-- QR Code Dialog -->
+<p-dialog header="{{ selectedRestaurant?.name }} - {{ qrTableNumber }}-р ширээ"
+          [(visible)]="qrDialogVisible"
+          [modal]="true"
+
+          class="genQr"
+          (onHide)="qrDialogVisible = false">
+  <div class="grid">
+    <div class="col-6">
+      <label>Ширээ №</label>
+
+    </div>
+    <div class="col-6">
+      <p-inputNumber [(ngModel)]="qrTableNumber" [min]="1"></p-inputNumber>
+
+    </div>
+    <div class="col-12" align="right">
+      <div class="p-field p-text-center" style="width: 100%; display: flex; justify-content: center;" *ngIf="qrImageSrc">
+        <img src="data:image/png;base64,{{qrImageSrc}}" alt="QR код" style="max-width:100%;"/>
+      </div>
+    </div>
+    <div class="col-6"></div>
+    <div class="col-6" align="right">
+      <div>
+        <button pButton label="Үүсгэх" icon="pi pi-check"
+                (click)="generateQr()" style="margin-right: 10px"></button>
+        <button pButton label="Хаах" icon="pi pi-times"
+                class="p-button-text"
+                (click)="qrDialogVisible = false">
+        </button>
+      </div>
+    </div>
+  </div>
+</p-dialog>

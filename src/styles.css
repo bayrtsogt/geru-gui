@@ -1,0 +1,270 @@
+@import "primeng/resources/themes/lara-light-blue/theme.css";
+@import "primeng/resources/primeng.css";
+@import 'primeflex/primeflex.scss';
+@import "primeicons/primeicons.css";
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+@font-face {
+  font-family: 'MonFnt11';
+  src: url('assets/fonts/MonFnt11.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'MonVivaldi';
+  src: url('assets/fonts/MonVivaldi.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'MonFnt11Bold';
+  src: url('assets/fonts/MonFnt11-Bold.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+}
+
+:root {
+  --main-blue: #622406;
+  --main-red: #d9703f;
+  --main-text-font: "Montserrat", sans-serif;
+  --main-font: "Montserrat", sans-serif;
+  --highlight-font: 'MonFnt11', sans-serif;
+  --main-box-shadow: 0 0 10px -3px;
+  --blue-500: #1B1C30; /* Change main blue */
+  --primary-color: var(--blue-500); /* Set it as the primary color */
+  --red-500: #d9703f; /* Change main red */
+  --font-family: 'MonFnt11', sans-serif; /* Custom font */
+  --shadow-2: 0 0 10px -3px; /* Custom box shadow */
+  --primary-50: #e7e8f2;
+  --primary-100: #b1b5d4;
+  --primary-200: #7a7fae;
+  --primary-300: #434982;
+  --primary-400: #1d2e6a;
+  --primary-500: #1B1C30;
+  --primary-600: #161a2b;
+  --primary-700: #101324;
+  --primary-800: #0b0d1e;
+  --primary-900: #060815 ;
+  --red-50:#fff5f5;
+  --red-100:#ffd0ce;
+  --red-200:#ffaca7;
+  --red-300:#ff8780;
+  --red-400:#ff6259;
+  --red-500:#ff3d32;
+  --red-600:#d9342b;
+  --red-700:#b32b23;
+  --red-800:#8c221c;
+  --red-900:#661814;
+}
+
+@font-face {
+  font-family: 'MonFnt11', sans-serif;
+  font-weight: 100 900;
+  font-display: swap;
+  font-style: normal;
+  font-named-instance: "Regular";
+  src: url("https://fonts.googleapis.com/css2?family=Exo:ital,wght@0,100..900;1,100..900&display=swap");
+}
+body{
+  background: linear-gradient(var(--main-blue),white, 90deg);
+  margin: 0;
+  font-family: var(--main-font) !important;
+}
+div{
+  font-family: var(--main-font) !important;
+}
+button{
+  font-family: var(--main-font) !important;
+
+}
+input{
+  font-family: Montserrat, sans-serif !important;
+}
+.color-red{
+  color: var(--main-red);
+}
+.color-blue{
+  color: var(--main-blue);
+}
+.background-blue{
+  background: var(--main-blue);
+  color:white;
+}
+.background-red{
+  background: var(--main-red);
+  color:white;
+}
+.background-white{
+  background: #E5E5E5;
+  color: var(--main-blue);
+}
+.flex {
+  display: flex;
+}
+.justify-content-center {
+  justify-content: center;
+}
+.justify-content-between {
+  justify-content: space-between;
+}
+.justify-content-left {
+  justify-content: left;
+}
+.justify-content-right {
+  justify-content: right;
+}
+.align-items-center {
+  align-items: center;
+}
+.align-items-left {
+  align-items: start;
+}
+.align-items-right {
+  align-items: end;
+}
+button{
+  padding: 5px 25px !important;
+  border: none;
+  color: white;
+  border-radius: 20px;
+  font-weight: normal !important;
+}
+.p-button-label{
+  font-weight: normal !important;
+}
+.title{
+  font-weight: bold;
+  font-size: 40px;
+  color: var(--main-blue);
+}
+.line{
+  background: var(--main-red);
+  height: 3px;
+  border-radius: 3px;
+  width: 120px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+.text{
+  margin-top: 15px;
+  font-weight: normal;
+  font-size: 20px;
+  color: rgba(27, 28, 48, 0.51);
+}
+.textBox{
+  padding: 10px;
+  width: 508px;
+  margin: 60px 0px 0px;
+}
+.bold{
+  font-weight: bold;
+}
+.footer{
+  width: 50%;
+  background: var(--main-blue);
+  color: white;
+  padding: 20px 30px;
+  font-size: 12px;
+  border-radius: 20px;
+  margin: 100px 100px 20px;
+}
+.footer div{
+  padding: 0px;
+}
+.p-card{
+  box-shadow: 0 0 10px -3px;
+  border-radius: 25px;
+}
+.top-bar{
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+/* For WebKit browsers (Chrome, Safari) */
+::-webkit-scrollbar {
+  width: 3px; /* Width of the scrollbar */
+  background-color: #f1f1f1; /* Background color of the scrollbar */
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--main-blue); /* Color of the scrollbar thumb */
+  border-radius: 3px; /* Rounded corners */
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #555; /* Color on hover */
+}
+
+/* For Firefox */
+.scrollable {
+  scrollbar-width: thin; /* Makes the scrollbar thin */
+  scrollbar-color: #1B1C30 #f1f1f1; /* Thumb color and track color */
+}
+#main{
+  margin: -90px -20px -20px;
+}
+.p-inputtext{
+  border-radius: 20px;
+  padding: 8px 24px;
+  width: 100%;
+  border: none;
+  color: var(--main-blue) 0.4;
+  background: #E5E5E5;
+}
+.inputTitle{
+  font-family: Montserrat, sans-serif !important;
+  font-size: 12px;
+  margin: 5px;
+}
+.main-button{
+  border-radius: 25px;
+  padding: 10px 48px !important;
+  margin-right: 4px;
+  margin-bottom: -1px;
+}
+.p-card.p-component{
+  border-radius: 20px 20px 20px 20px;
+}
+.p-card .p-card-content{
+  padding: 0
+}
+.p-dropdown{
+  border: none !important;
+}
+.p-dropdown:focus{
+  border: none !important;
+}
+.p-dropdown:active{
+  border: none !important;
+}
+/* Button */
+.p-button {
+  background-color: var(--main-blue);
+  color: white;
+  font-family: var(--font-family);
+}
+
+.p-button:hover {
+  background-color: var(--red-500);
+}
+
+/* Dropdown */
+.p-dropdown {
+  border-color: var(--blue-500);
+}
+
+.blueLine{
+  width: 100%;
+  height: 2px;
+  background: var(--main-blue);
+  margin: 10px;
+}
+.p-scrollpanel-bar{
+  background: var(--main-blue);
+  width: 5px;
+}
+.p-checkbox .p-checkbox-box.p-highlight{
+  background-color: var(--blue-500);
+  border-color:var(--blue-700);
+}

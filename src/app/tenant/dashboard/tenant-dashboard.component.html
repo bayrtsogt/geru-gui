@@ -1,0 +1,121 @@
+<div style="padding: 20px">
+  <div class="grid" style="width: calc(100vw - 50px); height: 3rem; padding: 10px; margin:-15px 0 25px;">
+    <div class="col-6 flex justify-content-left">
+      <div style="font-size:20px; font-weight:700" class="color-blue">Миний цэснүүд</div>
+    </div>
+    <div class="col-6 flex justify-content-right">
+      <p-button label="Меню үүсгэх" icon="pi pi-plus" (click)="openNewMenuDialog()"></p-button>
+    </div>
+  </div>
+
+  <!-- Менүүдийн жагсаалт -->
+  <div class="menu-list">
+    <div class="menu-card" *ngFor="let menu of menus">
+      <div class="menu-header">{{ menu.name }}</div>
+      <div class="menu-body">
+        <ng-container *ngIf="menu.products?.length; else noProd">
+          {{ menu.products.length }} ш бүтээгдэхүүнтэй
+        </ng-container>
+        <ng-template #noProd>
+          <div class="no-prod">Бүтээгдэхүүнгүй</div>
+        </ng-template>
+      </div>
+      <div class="menu-footer">
+        <button
+                pButton
+                type="button"
+                label="Бүтээгдэхүүн нэмэх"
+                icon="pi pi-plus"
+                (click)="openAssignDialog(menu)"
+        ></button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Dialog: Шинэ меню үүсгэх -->
+<p-dialog
+  header="Меню үүсгэх"
+  [(visible)]="menuDialogVisible"
+  modal="true"
+  [closable]="true"
+  [style]="{ width: '400px' }"
+  (onHide)="onMenuDialogHide()"
+>
+  <div class="grid">
+    <div class="col-10">
+      <input
+        id="menuName"
+        type="text"
+        pInputText
+        [(ngModel)]="menuName"
+        name="menuName"
+        placeholder="Цэсийн нэр"
+      />
+    </div>
+    <div class="col-10">
+
+      <p-dropdown
+        [options]="menuTypes"
+        [(ngModel)]="menuType"
+        name="menuType"
+        placeholder="Төрөл сонгох"
+      ></p-dropdown>
+    </div>
+    <div class="col-10" *ngIf="menuType != 'Main'">
+      <p-dropdown
+        [options]="menus"
+        [(ngModel)]="parentId"
+        name="parentMenu"
+        optionLabel="name"
+        optionValue="id"
+        placeholder="Үндсэн цэс холбох"
+      ></p-dropdown>
+    </div>
+  </div>
+  <p-footer>
+    <button
+      pButton
+      type="button"
+      label="Хадгалах"
+      icon="pi pi-check"
+      (click)="saveMenu()"
+    ></button>
+  </p-footer>
+</p-dialog>
+
+<!-- Dialog: Бүтээгдэхүүн сонгох -->
+<p-dialog
+  header="Бүтээгдэхүүн сонгох: {{ selectedMenu?.name }}"
+  [(visible)]="assignDialogVisible"
+  modal="true"
+  [style]="{ width: '500px', height: '400px' }"
+  (onHide)="onAssignDialogHide()"
+><div class="chip-selector">
+  <p-chip
+    *ngFor="let prod of products"
+    [label]="prod.name"
+    (click)="toggleProduct(prod.id)"
+    [removable]="isSelected(prod.id)"
+  ></p-chip>
+</div>
+
+  <p-footer>
+    <button
+      pButton
+      type="button"
+      label="Цуцлах"
+      icon="pi pi-times"
+      class="p-button-text"
+      (click)="assignDialogVisible = false"
+    ></button>
+    <button
+      pButton
+      type="button"
+      label="Нэмэх"
+      icon="pi pi-check"
+      (click)="saveMenuProducts()"
+    ></button>
+  </p-footer>
+</p-dialog>

@@ -1,0 +1,126 @@
+<div class="qr-container">
+
+  <!-- ITEM GRID / CART -->
+  <div class="item-grid" >
+
+
+    <div class="flex justify-content-center align-items-center" style="flex-direction: column">
+      <div class="mainTitle">
+        GERU
+      </div>
+      <div class="mainLine">
+      </div>
+      <div class="mainSubTitle">
+        RESTAURANT SYSTEM
+      </div>
+    </div>
+    <ng-container *ngIf="screen==='cart'; else productGrid">
+    <div class="grid-header" style="color: white; margin-bottom: 30px;  font-size:50px; font-family: 'MonVivaldi', sans-serif !important;" align="center">Таны захиалга</div>
+
+    <div *ngIf="cart.length; else emptyCart" class="p-grid">
+      <div *ngFor="let item of cart" class="cart-item p-col-6">
+        <img [src]="'data:image/jpeg;base64,'+item.product.image" class="cart-thumb"/>
+        <div class="p-mx-2 flex-grow-1">
+          {{item.product.name}}<br/>
+          {{item.quantity}} × {{item.product.price | number}}₮
+        </div>
+        <button pButton icon="pi pi-minus" class="p-button-text" (click)="decreaseQty(item)"></button>
+        <button pButton icon="pi pi-plus"  class="p-button-text" (click)="increaseQty(item)"></button>
+        <button pButton icon="pi pi-trash" class="p-button-danger p-button-text" (click)="removeFromCart(item)"></button>
+      </div>
+
+      <!-- total -->
+      <div class="flex justify-content-right">
+        <div class="cart-total p-text-right p-mt-3">
+          Total: {{ getCartTotal() | number }}₮
+        </div>
+      </div>
+
+      <!-- NEW: Pay button -->
+      <div class="flex justify-content-center" style="    flex-direction: column;
+    width: 100vw;
+    gap: 20px;
+    padding: 0 20vw;">
+        <button
+                pButton
+                type="button"
+                label="Төлбөр төлөх"
+                class="p-button-success p-button-lg"
+                style="width: 70vw"
+                (click)="checkout()">
+        </button>
+        <button
+          *ngIf="click > 0"
+                pButton
+                type="button"
+                label="Төлбөр шалгах"
+                class="p-button-success p-button-lg"
+          style="width: 70vw"
+                (click)="checkInvoice()">
+        </button>
+      </div>
+    </div>
+
+    <ng-template #emptyCart>
+      <div class="flex justify-content-center">
+        <p class="p-text-center p-m-4">Та хоол захиалагүй байна.</p>
+      </div>
+    </ng-template>
+  </ng-container>
+
+
+    <!-- Product grid -->
+    <ng-template #productGrid>
+      <div class="grid-header p-d-flex p-ai-center">
+        <div class="p-ml-2" style="color: white; margin-bottom: 30px;  font-size:50px; font-family: 'MonVivaldi', sans-serif !important;" align="center">{{
+          screen == 'Drinks' ?
+            'Уух зүйлс'
+            :
+            screen == 'alcohol' ?
+              'Алкохол'
+              :
+
+              screen == 'foods' ?
+                'Хоол'
+                :
+                  'Таны захиалга'
+
+          }}</div>
+      </div>
+      <div class="grid">
+        <div class="card" *ngFor="let p of getCurrentList()" (click)="addToCart(p)">
+          <img [src]="'data:image/jpeg;base64,' + p.image" [alt]="p.name"/>
+          <div class="info">
+            <div class="name">{{ p.name }}</div>
+            <div class="price">{{ p.price | number }}₮</div>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+  </div>
+
+  <!-- FIXED BOTTOM NAV --><!-- FIXED BOTTOM NAV -->
+  <div class="bottom-nav">
+    <div class="nav-btn"  [class.p-button-outlined]="screen!=='Drinks'"
+         (click)="go('Drinks')">
+      <img src="assets/mug-hot-alt%20(1).png" height="50px">
+      <div>Уух зүйлс</div>
+    </div>
+    <div class="nav-btn"  [class.p-button-outlined]="screen!=='alcohol'"
+         (click)="go('alcohol')">
+      <img src="assets/martini-glass-citrus.png" height="50px">
+      <div>Алкохол</div>
+    </div>
+    <div class="nav-btn"  [class.p-button-outlined]="screen!=='foods'"
+         (click)="go('foods')">
+      <img src="assets/pizza-slice.png" height="50px">
+      <div>Хоол</div>
+    </div>
+    <div class="nav-btn"  [class.p-button-outlined]="screen!=='cart'"
+         (click)="openCart()">
+      <img src="assets/shopping-cart.png" height="50px">
+      <div>Сагс</div>
+    </div>
+  </div>
+
+</div>
