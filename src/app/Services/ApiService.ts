@@ -35,7 +35,7 @@ export class ApiService {
 
   /** Шинэ хэрэглэгч үүсгэх хүсэлт */
   createUser(body: any): Observable<any> {
-    return this.post('user/save', body);
+    return this.post('user/createUser', body);
   }
 
   /** Нууц үг сэргээх хүсэлт */
@@ -84,8 +84,13 @@ export class ApiService {
   }
 
   /** Төлбөрийн нэхэмжлэх үүсгэх хүсэлт */
-  createInvoice(s: string) {
-    return this.post('rest/createInvoice', s);
+  createInvoice(body: string): Observable<any> {
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    return this.http.post<any>(
+      `${this.apiBase}/rest/createInvoice`,
+      body,
+      { headers }
+    );
   }
 
   /** Төлбөрийн нэхэмжлэх төлөгдсөн эсэхийг шалгах хүсэлт */

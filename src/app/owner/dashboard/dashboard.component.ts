@@ -53,7 +53,7 @@ export class DashboardComponent implements OnInit {
   /** After creating a new restaurant */
   done() {
     this.addRestaurantVisible = false;
-    // window.location.reload();
+    window.location.reload();
   }
 
   delete(restaurant: any) {
