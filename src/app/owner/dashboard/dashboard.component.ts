@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MessageService } from 'primeng/api';
 import {ApiService} from "../../Services/ApiService";
+import {environment} from "../../../environments/environment";
 
 @Component({
   selector: 'app-dashboard',
@@ -60,5 +61,10 @@ export class DashboardComponent implements OnInit {
     this.apiService.deleteRestaurant(restaurant.id).subscribe(() =>{
         window.location.reload();
       });
+  }
+  downloadReport(restaurantId: number) {
+    const url = `${environment.apiHost}/restaurants/${restaurantId}/owner-report.xlsx`;
+    // Шинэ таб-д нээх ба шууд татах үйлдэл эхлэнэ
+    window.open(url, '_blank');
   }
 }

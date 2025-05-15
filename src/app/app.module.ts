@@ -99,7 +99,8 @@ import { BarComponent } from './bar/bar.component';
     MultiSelectModule,
     ChipModule,
     SidebarModule,
-    TabMenuModule
+    TabMenuModule,
+    MenuModule
   ],
   providers: [
     {

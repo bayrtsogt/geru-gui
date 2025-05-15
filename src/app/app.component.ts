@@ -25,6 +25,8 @@ export class AppComponent implements OnInit {
       this.layout = data['layout'] || 'default';             // store the layout flag :contentReference[oaicite:6]{index=6}
     });
 
+    console.log("dsafa")
+    console.log(window.location.hostname)
 
   }
 }

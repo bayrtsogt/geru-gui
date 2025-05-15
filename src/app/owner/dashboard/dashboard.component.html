@@ -26,13 +26,14 @@
           <div class="text-xs text-gray-600">{{ restaurant.location }}</div>
         </div>
         <div class="button-bar">
-          <div class="button" (click)="openQrDialog(restaurant)">
+          <div class="button" pTooltip="QR үүсгэх" tooltipPosition="bottom" (click)="openQrDialog(restaurant)">
             <i class="pi pi-qrcode"></i>
-            <span>QR үүсгэх</span>
           </div>
-          <div class="button" (click)="delete(restaurant)">
+          <div class="button" pTooltip="Тайлан татах xls"  tooltipPosition="bottom" (click)="downloadReport(restaurant.id)">
+            <i class="pi pi-file-excel"></i>
+          </div>
+          <div class="button" pTooltip="Ресторан устгах" tooltipPosition="bottom" (click)="delete(restaurant)">
             <i class="pi pi-trash"></i>
-            <span>Устгах</span>
           </div>
         </div>
       </p-card>
